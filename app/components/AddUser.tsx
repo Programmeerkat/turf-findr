@@ -10,27 +10,21 @@ export default function AddUser() {
         className="bg-gray-600 p-8 flex flex-col max-w-[600px]"
         action={createUser}
         >
-        <label>Name</label>
-        <input
-          name="name"
-          className="bg-white border-black mb-4 text-black"
-          type="text"
-          />
         <label>Email</label>
         <input
           name="email"
           className="bg-white border-black mb-4 text-black"
           type="email"
           />
-        <label>Country</label>
+        <label>Password</label>
         <input
-          name="country"
+          name="password"
           className="bg-white border-black mb-4 text-black"
-          type="text"
+          type="password"
           />
-        <label>Bio</label>
+        <label>Username</label>
         <input
-          name="bio"
+          name="username"
           className="bg-white border-black mb-4 text-black"
           type="text"
           />
