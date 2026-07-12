@@ -8,6 +8,9 @@ CREATE TABLE Users(
 );
 
 -- @block
+ALTER TABLE Users ADD COLUMN password_hash VARCHAR(255) NOT NULL;
+
+-- @block
 INSERT INTO Users (name, email, bio, country)
 VALUES 
     ('daniel', 'daniel@email.com', 'Developer', 'NL');
@@ -20,6 +23,8 @@ VALUES
 -- @block
 SELECT * FROM Users;
 
+-- @block
+DELETE FROM Users WHERE id = '4';
 
 
 
