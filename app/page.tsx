@@ -9,6 +9,9 @@ export default async function Home() {
     <div className="">
       <main className="">
         <div className="max-w-screen-xl mx-auto flex flex-col gap-4 py-4">
+          <h2 className="text-xl mb-4">
+            Popular users
+          </h2>
           <UsersOverview users={users} />
           <h2 className="text-xl mb-4">
             Popular rooms
