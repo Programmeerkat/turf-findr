@@ -24,8 +24,25 @@ VALUES
 SELECT * FROM Users;
 
 -- @block
-DELETE FROM Users WHERE id = '4';
+DELETE FROM Users WHERE id = 6;
 
+
+
+
+
+
+
+-- @block
+CREATE TABLE Sessions (
+  id VARCHAR(36) PRIMARY KEY,
+  user_id INT NOT NULL,
+  expires_at DATETIME NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE
+);
+
+
+-- @block
+SELECT * FROM Sessions;
 
 
 
@@ -54,3 +71,7 @@ VALUES
 
 -- @block
 SELECT * FROM Rooms;
+
+
+-- @block
+DELETE FROM Rooms WHERE owner_id = 1;
