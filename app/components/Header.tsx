@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Login from "./Login";
+import logOut from "../actions/logout";
 import getSession from "../lib/getSession";
 
 export default async function Header() {
@@ -19,7 +20,12 @@ export default async function Header() {
 				Add room
 			</Link>
 			{session ? (
-				<span>Welcome, {session.name}</span>
+				<>
+					<span>Welcome, {session.name}</span>
+					<form action={logOut}>
+						<button type="submit">Logout</button>
+					</form>
+				</>
 			) : (
 				<Login />
 			)}

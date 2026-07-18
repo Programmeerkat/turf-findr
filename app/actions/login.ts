@@ -42,5 +42,7 @@ export default async function login(formData: FormData) {
         maxAge: 60 * 60 * 24 * 7,
     });
 
+    console.log("User sucessfully logged in");
+
     redirect('/');
 };
