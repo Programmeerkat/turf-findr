@@ -1,10 +1,12 @@
 import Link from "next/link";
 import Login from "./Login";
+import getSession from "../lib/getSession";
 
-export default function Header() {
+export default async function Header() {
+  const session = await getSession();
   return (
     <header className="bg-rose-800 p-8">
-		<div className="flex align-center justify-left max-w-screen-xl mx-auto">
+		<div className="flex align-center justify-left gap-8 max-w-screen-xl mx-auto">
 			<Link href="/">
 				<h1>
 					TurfFindr
@@ -16,7 +18,11 @@ export default function Header() {
 			<Link href="/addroom">
 				Add room
 			</Link>
-			<Login />
+			{session ? (
+				<span>Welcome, {session.name}</span>
+			) : (
+				<Login />
+			)}
 		</div>
     </header>
   );
