@@ -32,7 +32,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <Header />
-        <div className="max-w-screen-xl mx-auto py-8 min-w-[430px]">
+        <div className="max-w-5xl mx-auto py-8 min-w-[430px]">
           {children}
         </div>
         <Footer />
