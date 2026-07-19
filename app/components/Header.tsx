@@ -8,33 +8,33 @@ export default async function Header() {
 	const avatarFallbackText = session?.name.charAt(0).toUpperCase() ?? "";
 
   return (
-    <header className="bg-rose-800 p-8">
-		<div className="flex align-center justify-start gap-8 max-w-5xl mx-auto">
-			<Link href="/">
-				<h1>
-					TurfFindr
-				</h1>
-			</Link>
-			{session ? (
-				<div className="flex justify-end items-center gap-8 flex-1">
-					<form action={logOut}>
-						<button type="submit">Logout</button>
-					</form>
-					<Link href="/profile">
-						<Avatar name={avatarFallbackText}/>
-					</Link>
-				</div>
-			) : (
-				<div className="flex justify-end items-center gap-8 flex-1">
-					<Link href="/signin">
-						Sign in
-					</Link>
-					<Link href="/signup">
-						Sign up
-					</Link>
-				</div>
-			)}
-		</div>
+    <header className="bg-rose-800">
+      <div className="flex align-center justify-start gap-8 max-w-5xl mx-auto py-6">
+        <Link href="/">
+          <h1>
+            TurfFindr
+          </h1>
+        </Link>
+        {session ? (
+          <div className="flex justify-end items-center gap-8 flex-1">
+            <form action={logOut}>
+              <button type="submit">Logout</button>
+            </form>
+            <Link href="/profile">
+              <Avatar name={avatarFallbackText}/>
+            </Link>
+          </div>
+        ) : (
+          <div className="flex justify-end items-center gap-8 flex-1">
+            <Link href="/signin">
+              Sign in
+            </Link>
+            <Link href="/signup">
+              Sign up
+            </Link>
+          </div>
+        )}
+      </div>
     </header>
   );
 };
