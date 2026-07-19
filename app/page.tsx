@@ -45,34 +45,31 @@ export default async function Home() {
           <h2 className="text-xl mb-4">
             Find turf
           </h2>
-          <div className="bg-gray-900 flex gap-4 p-4">
+          <form action="/search" method="GET" className="bg-gray-900 flex gap-4 p-4">
             <div className="flex gap-8 items-center">
               <div>
                 <p>
-                  Desination
+                  Destination
                 </p>
                 <input 
-                  type="text" className="bg-white text-black px-2 py-1"
-                  >
-                </input>
+                  type="text" name="destination" className="bg-white text-black px-2 py-1"
+                />
               </div>
               <div>
                 <p>
                   From
                 </p>
                 <input 
-                  type="date" className="bg-white text-black px-2 py-1"
-                  >
-                </input>
+                  type="date" name="starting_date" className="bg-white text-black px-2 py-1"
+                />
               </div>
               <div>
                 <p>
                   To
                 </p>
                 <input 
-                  type="date" className="bg-white text-black px-2 py-1"
-                  >
-                </input>
+                  type="date" name="ending_date" className="bg-white text-black px-2 py-1"
+                />
               </div>
               <div>
                 <button
@@ -83,7 +80,7 @@ export default async function Home() {
                 </button>
               </div>
             </div>
-          </div>
+          </form>
           <h2 className="text-xl mb-4">
             Popular turf
           </h2>
