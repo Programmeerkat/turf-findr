@@ -20,7 +20,9 @@ export default async function Header() {
 					<form action={logOut}>
 						<button type="submit">Logout</button>
 					</form>
-					<Avatar name={avatarFallbackText}/>
+					<Link href="/profile">
+						<Avatar name={avatarFallbackText}/>
+					</Link>
 				</div>
 			) : (
 				<div className="flex justify-end items-center gap-8 flex-1">

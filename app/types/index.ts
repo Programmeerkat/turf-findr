@@ -12,4 +12,5 @@ export type Room = {
   street: string;
   title: string;
   description: string;
+  imgSrc: string;
 };

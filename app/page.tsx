@@ -1,10 +1,16 @@
 import getUsers from "./actions/getUsers";
 import getAvailableRooms from "./actions/getAvailableRooms";
 import { UsersOverview } from "./components/UserOverview";
+import TurfCardContainer from "./components/TurfCardContainer";
+import TurfCard from "./components/TurfCard";
 
 export default async function Home() {
   const users = await getUsers();
   const rooms = await getAvailableRooms();
+  const popularTurf = rooms;
+  const newTurf = rooms;
+  const cheapTurf = rooms;
+  
   return (
     <div className="">
       <main className="">
@@ -54,69 +60,42 @@ export default async function Home() {
           <h2 className="text-xl mb-4">
             Popular turf
           </h2>
-          <ul className="flex gap-4 overflow-x-auto">
-            {rooms.map(room => (
-              <li
-                className="text-center shrink-0"
-                key={room.id}
-              >
-                <img 
-                  src="https://placehold.co/320x240"
-                  className="mb-1"
-                />
-                <p className="!mb-0">
-                  {room.title}
-                </p>
-                <span className="text-xs">
-                  {room.city}, {room.country}
-                </span>
-              </li>
+          <TurfCardContainer>
+            {popularTurf.map((room) => (
+              <TurfCard
+                key = {room.title}
+                title = {room.title}
+                subtitle = {`${room.city}, ${room.country}`}
+                imgSrc = {room.imgSrc}					
+              />
             ))}
-          </ul>
+          </TurfCardContainer>
           <h2 className="text-xl mb-4">
             New turf
           </h2>
-          <ul className="flex gap-4 overflow-x-auto">
-            {rooms.map(room => (
-              <li
-                className="text-center shrink-0"
-                key={room.id}
-              >
-                <img 
-                  src="https://placehold.co/320x240"
-                  className="mb-1"
-                />
-                <p className="!mb-0">
-                  {room.title}
-                </p>
-                <span className="text-xs">
-                  {room.city}, {room.country}
-                </span>
-              </li>
+          <TurfCardContainer>
+            {newTurf.map((room) => (
+              <TurfCard
+                key = {room.title}
+                title = {room.title}
+                subtitle = {`${room.city}, ${room.country}`}
+                imgSrc = {room.imgSrc}					
+              />
             ))}
-          </ul>
+                </TurfCardContainer>
           <h2 className="text-xl mb-4">
             Cheap turf
           </h2>
-          <ul className="flex gap-4 overflow-x-auto">
-            {rooms.map(room => (
-              <li
-                className="text-center shrink-0"
-                key={room.id}
-              >
-                <img 
-                  src="https://placehold.co/320x240"
-                  className="mb-1"
-                />
-                <p className="!mb-0">
-                  {room.title}
-                </p>
-                <span className="text-xs">
-                  {room.city}, {room.country}
-                </span>
-              </li>
+          <TurfCardContainer>
+            {cheapTurf.map((room) => (
+              <TurfCard
+                key = {room.title}
+                title = {room.title}
+                subtitle = {`${room.city}, ${room.country}`}
+                imgSrc = {room.imgSrc}					
+              />
             ))}
-          </ul>
+          </TurfCardContainer>
           <h2 className="text-xl mb-4">
             Popular turfers
           </h2>
