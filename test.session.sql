@@ -112,27 +112,6 @@ DROP TABLE Rooms;
 
 
 
--- @block
-CREATE TABLE Reviews (
-  id          INT AUTO_INCREMENT PRIMARY KEY,
-  user_id     INT NOT NULL,
-  room_id     INT NOT NULL,
-  rating      TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
-  text        TEXT,
-  created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES Users(id),
-  FOREIGN KEY (room_id) REFERENCES Rooms(id)
-);
-
--- @block
-DROP TABLE Reviews;
-
-
-
-
-
-
-
 
 
 
@@ -178,3 +157,41 @@ DELETE FROM Users WHERE id = 12;
 
 -- @block
 UPDATE Users SET name = 'Daniel' WHERE id = 10;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- @block
+CREATE TABLE Reviews (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  booking_id INT NOT NULL UNIQUE,
+  rating TINYINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+  text TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (booking_id) REFERENCES Bookings(id)
+);
+
+-- @block
+INSERT INTO Reviews (booking_id, rating, text)
+VALUES 
+  (1, 5, 'Perfect! Goed schoon'),
+  (2, 4, 'Goed, had schoner gekunt')
+;
+
+-- @block
+SELECT * FROM Reviews;
+
+-- @block
+DROP TABLE Reviews;
