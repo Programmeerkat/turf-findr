@@ -3,7 +3,8 @@ import TurfCard from "../components/TurfCard";
 import getSession from "../lib/getSession";
 import pool from "../lib/db";
 import { Room } from "../types";
-import TurfCardContainer from "../components/TurfCardContainer";
+import CardContainer from "../components/CardContainer";
+import ReviewCard from "../components/ReviewCard";
 
 export default async function Profile() {
 	const session = await getSession();
@@ -26,19 +27,26 @@ export default async function Profile() {
 			<h2>
 				Your Turf
 			</h2>
-			<TurfCardContainer>
+			<CardContainer>
 				{rooms.map((room) => (
 					<TurfCard
 						key = {room.title}
 						title = {room.title}
 						subtitle = {`${room.city}, ${room.country}`}
-						imgSrc = {room.imgSrc}					
+						imgSrc = {room.img_src}					
 					/>
 				))}
-			</TurfCardContainer>
+			</CardContainer>
 			<h2>
 				Your reviews
 			</h2>
+      <div className="flex flex-col gap-4 w-full">
+        <ReviewCard name="Roswitha" stars={1} date="3 months ago" text="Perfect Turfr. Can recommend."/>
+        <ReviewCard name="Roswitha" stars={2} date="3 months ago" text="Perfect Turfr. Can recommend."/>
+        <ReviewCard name="Roswitha" stars={3} date="3 months ago" text="Perfect Turfr. Can recommend."/>
+        <ReviewCard name="Roswitha" stars={4} date="3 months ago" text="Perfect Turfr. Can recommend."/>
+        <ReviewCard name="Roswitha" stars={5} date="3 months ago" text="Perfect Turfr. Can recommend."/>
+		  </div>
 		</div>
 	);
 };

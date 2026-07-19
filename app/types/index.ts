@@ -12,5 +12,12 @@ export type Room = {
   street: string;
   title: string;
   description: string;
-  imgSrc: string;
+  img_src: string;
 };
+
+export type Review = {
+  stars: number;
+  fromId: string;
+  text: string;
+  date: string;
+}

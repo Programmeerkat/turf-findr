@@ -1,15 +1,39 @@
 import getUsers from "./actions/getUsers";
-import getAvailableRooms from "./actions/getAvailableRooms";
 import { UsersOverview } from "./components/UserOverview";
-import TurfCardContainer from "./components/TurfCardContainer";
+import CardContainer from "./components/CardContainer";
 import TurfCard from "./components/TurfCard";
+import pool from "./lib/db";
+import { RowDataPacket } from "mysql2";
+
+interface Room extends RowDataPacket {
+  id: number;
+  owner_id: number;
+  country: string;
+  city: string;
+  street: string;
+  title: string;
+  description: string;
+  img_src: string;
+  created_at: string;
+}
 
 export default async function Home() {
   const users = await getUsers();
-  const rooms = await getAvailableRooms();
-  const popularTurf = rooms;
-  const newTurf = rooms;
-  const cheapTurf = rooms;
+
+  const [popularTurf] = await pool.query<Room[]>(`
+    SELECT r.*, COUNT(b.id) AS booking_count
+    FROM Rooms r
+    JOIN Bookings b ON b.room_id = r.id
+    GROUP BY r.id
+    ORDER BY booking_count DESC
+    LIMIT 3
+  `);
+  const [newTurf] = await pool.query<Room[]>(`
+    SELECT * FROM Rooms ORDER BY created_at DESC LIMIT 3
+  `);
+  const [cheapTurf] = await pool.query<Room[]>(`
+    SELECT * FROM Rooms ORDER BY price DESC LIMIT 3
+  `);
   
   return (
     <div className="">
@@ -60,42 +84,42 @@ export default async function Home() {
           <h2 className="text-xl mb-4">
             Popular turf
           </h2>
-          <TurfCardContainer>
+          <CardContainer>
             {popularTurf.map((room) => (
               <TurfCard
-                key = {room.title}
+                key = {room.id}
                 title = {room.title}
                 subtitle = {`${room.city}, ${room.country}`}
-                imgSrc = {room.imgSrc}					
+                imgSrc = {room.img_src}					
               />
             ))}
-          </TurfCardContainer>
+          </CardContainer>
           <h2 className="text-xl mb-4">
             New turf
           </h2>
-          <TurfCardContainer>
+          <CardContainer>
             {newTurf.map((room) => (
               <TurfCard
-                key = {room.title}
+                key = {room.id}
                 title = {room.title}
                 subtitle = {`${room.city}, ${room.country}`}
-                imgSrc = {room.imgSrc}					
+                imgSrc = {room.img_src}					
               />
             ))}
-                </TurfCardContainer>
+          </CardContainer>
           <h2 className="text-xl mb-4">
             Cheap turf
           </h2>
-          <TurfCardContainer>
+          <CardContainer>
             {cheapTurf.map((room) => (
               <TurfCard
-                key = {room.title}
+                key = {room.id}
                 title = {room.title}
                 subtitle = {`${room.city}, ${room.country}`}
-                imgSrc = {room.imgSrc}					
+                imgSrc = {room.img_src}					
               />
             ))}
-          </TurfCardContainer>
+          </CardContainer>
           <h2 className="text-xl mb-4">
             Popular turfers
           </h2>
