@@ -5,6 +5,7 @@ import pool from "../lib/db";
 import { Room } from "../types";
 import CardContainer from "../components/CardContainer";
 import ReviewCard from "../components/ReviewCard";
+import Link from "next/link";
 
 export default async function Profile() {
 	const session = await getSession();
@@ -29,12 +30,16 @@ export default async function Profile() {
 			</h2>
 			<CardContainer>
 				{rooms.map((room) => (
-					<TurfCard
-						key = {room.title}
-						title = {room.title}
-						subtitle = {`${room.city}, ${room.country}`}
-						imgSrc = {room.img_src}					
-					/>
+          <Link
+            key={room.id} 
+            href={`/turf/${room.id}`}
+          >
+            <TurfCard
+              title={room.title}
+              subtitle={`${room.city}, ${room.country}`}
+              imgSrc={room.img_src}					
+            />
+          </Link>
 				))}
 			</CardContainer>
 			<h2>

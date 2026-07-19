@@ -1,9 +1,12 @@
+import Link from "next/link";
+
+import { RowDataPacket } from "mysql2";
+
 import getUsers from "./actions/getUsers";
 import { UsersOverview } from "./components/UserOverview";
 import CardContainer from "./components/CardContainer";
 import TurfCard from "./components/TurfCard";
 import pool from "./lib/db";
-import { RowDataPacket } from "mysql2";
 
 interface Room extends RowDataPacket {
   id: number;
@@ -86,12 +89,16 @@ export default async function Home() {
           </h2>
           <CardContainer>
             {popularTurf.map((room) => (
-              <TurfCard
-                key = {room.id}
-                title = {room.title}
-                subtitle = {`${room.city}, ${room.country}`}
-                imgSrc = {room.img_src}					
-              />
+              <Link 
+                key={room.id} 
+                href={`/turf/${room.id}`}
+              >
+                <TurfCard
+                  title={room.title}
+                  subtitle={`${room.city}, ${room.country}`}
+                  imgSrc={room.img_src}					
+                />
+              </Link>
             ))}
           </CardContainer>
           <h2 className="text-xl mb-4">
@@ -99,12 +106,16 @@ export default async function Home() {
           </h2>
           <CardContainer>
             {newTurf.map((room) => (
-              <TurfCard
-                key = {room.id}
-                title = {room.title}
-                subtitle = {`${room.city}, ${room.country}`}
-                imgSrc = {room.img_src}					
-              />
+              <Link 
+                key={room.id} 
+                href={`/turf/${room.id}`}
+              >
+                <TurfCard
+                  title={room.title}
+                  subtitle={`${room.city}, ${room.country}`}
+                  imgSrc={room.img_src}					
+                />
+              </Link>
             ))}
           </CardContainer>
           <h2 className="text-xl mb-4">
@@ -112,12 +123,16 @@ export default async function Home() {
           </h2>
           <CardContainer>
             {cheapTurf.map((room) => (
-              <TurfCard
-                key = {room.id}
-                title = {room.title}
-                subtitle = {`${room.city}, ${room.country}`}
-                imgSrc = {room.img_src}					
-              />
+              <Link 
+                key={room.id} 
+                href={`/turf/${room.id}`}
+              >
+                <TurfCard
+                  title={room.title}
+                  subtitle={`${room.city}, ${room.country}`}
+                  imgSrc={room.img_src}					
+                />
+              </Link>
             ))}
           </CardContainer>
           <h2 className="text-xl mb-4">

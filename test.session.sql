@@ -89,11 +89,14 @@ VALUES
     (10, 80.00, 'BE', 'Antwerp', 'Antwerpsestraat 8', 'Cozy appartment in Antwerp', 'Located in the center of Antwerp is this cozy apartement', 'https://placehold.co/320x240'),
     (10, 100.00, 'DE', 'Koln', 'Strasse 1', 'Small cozy house', 'A small and very cozy house in Koln', 'https://placehold.co/320x240'),
     (10, 110.00, 'DE', 'Koln', 'Strasse 2', 'Luxurious house', 'A very luxurious house in Koln', 'https://placehold.co/320x240'),
-    (10, 90.00, 'DE', 'Stuttgard', 'Stuttgardstrasse 8', 'Cozy appartment', 'Located in the center of Stuttgard is this cozy apartement', 'https://placehold.co/320x240'),
+    (10, 90.00, 'DE', 'Stuttgard', 'Stuttgardstrasse 8', 'Cozy appartment in Stuttgard', 'Located in the center of Stuttgard is this cozy apartement', 'https://placehold.co/320x240'),
     (10, 50.00, 'ES', 'Barcelona', 'Calle 1', 'Small cozy house', 'Small Spanish apartment 1', 'https://placehold.co/320x240'),
     (10, 51.00, 'ES', 'Barcelona', 'Calle 2', 'Luxurious house', 'Small Spanish apartment 2', 'https://placehold.co/320x240'),
-    (10, 52.00, 'ES', 'Barcelona', 'Calle 3', 'Cozy appartment', 'Small Spanish apartment 3', 'https://placehold.co/320x240')
+    (10, 52.00, 'ES', 'Barcelona', 'Calle 3', 'Cozy appartment in Barcelona', 'Small Spanish apartment 3', 'https://placehold.co/320x240')
 ;
+
+-- @block
+UPDATE Rooms SET title = 'Small cozy appartment in Barcelona' WHERE id = 9;
 
 -- @block
 SELECT * FROM Rooms;
