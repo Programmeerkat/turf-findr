@@ -1,17 +1,19 @@
 "use server";
 
-import pool from "../lib/db";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+
 import { RowDataPacket } from "mysql2";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
+
+import pool from "../lib/db";
 
 interface UserRow extends RowDataPacket {
   password_hash: string;
 };
 
-export default async function login(formData: FormData) {
+export default async function login(initialState: any, formData: FormData) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
@@ -19,15 +21,13 @@ export default async function login(formData: FormData) {
   const user = results[0];
 
   if (!user) {
-      console.log("No user found");
-      return;
+    return { error: "Invalid email or password" };
   }
 
   const match = await bcrypt.compare(password, user.password_hash);
 
   if (!match) {
-      console.log("Incorrect password");
-      return;
+    return { error: "Invalid email or password" };
   }
 
   const sessionId = crypto.randomUUID();
@@ -41,8 +41,6 @@ export default async function login(formData: FormData) {
       sameSite: "lax",
       maxAge: 60 * 60 * 24 * 7,
   });
-
-  console.log("User sucessfully logged in");
 
   redirect('/');
 };

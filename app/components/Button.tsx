@@ -12,10 +12,11 @@ const variantClass: Record<ButtonVariant, string> = {
   secondary: "bg-zinc-900 hover:bg-zinc-700",
 };
 
-export default function Button({ children, variant = "primary", ...props }: ButtonProps) {
+export default function Button({ children, variant = "primary", disabled, ...props }: ButtonProps) {
   return (
     <button
-      className={`${variantClass[variant]} px-4 py-2 rounded-xl`}
+      className={`${disabled ? "bg-gray-500 text-gray-300 cursor-not-allowed" : variantClass[variant]} px-4 py-2 rounded-xl`}
+      disabled={disabled}
       {...props}
     >
       {children}
