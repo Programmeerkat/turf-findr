@@ -31,14 +31,14 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body 
-        className="min-h-full flex flex-col"
+        className="min-h-full flex flex-col min-h-full"
       >
         <Header />
-        <div 
-          className="max-w-5xl mx-auto py-8 min-w-[430px]"
+        <main 
+          className="max-w-5xl mx-auto py-8 min-w-[430px] flex-1"
         >
           {children}
-        </div>
+        </main>
         <Footer />
       </body>
     </html>

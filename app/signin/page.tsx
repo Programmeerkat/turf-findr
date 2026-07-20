@@ -2,19 +2,11 @@ import Login from "../components/Login";
 
 export default async function SignUp() {
   return (
-    <div 
-      className=""
-    >
-      <main
-        className=""
-      >
-        <div>
-          <h2
-            className="text-xl mb-8">Sign in to TurfFindr
-          </h2>
-          <Login />
-        </div>
-      </main>
+    <div>
+      <h2
+        className="text-xl mb-8">Sign in to TurfFindr
+      </h2>
+      <Login />
     </div>
   );
 }
