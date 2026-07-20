@@ -33,6 +33,7 @@ export default async function Header() {
             >
               <Button
                 type="submit"
+                variant="secondary"
               >
                 Logout
               </Button>

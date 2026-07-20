@@ -9,7 +9,7 @@ type ButtonProps = ComponentProps<"button"> & {
 
 const variantClass: Record<ButtonVariant, string> = {
   primary: "bg-rose-800 hover:bg-rose-700 text-white",
-  secondary: "bg-black-1000 hover:bg-gray-500",
+  secondary: "bg-zinc-900 hover:bg-zinc-700",
 };
 
 export default function Button({ children, variant = "primary", ...props }: ButtonProps) {
