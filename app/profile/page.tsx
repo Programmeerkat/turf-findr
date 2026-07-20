@@ -3,12 +3,13 @@ import { redirect } from "next/navigation";
 
 import { RowDataPacket } from "mysql2";
 
+import AddReview from "../components/AddReview";
 import CardContainer from "../components/CardContainer";
 import TurfCard from "../components/TurfCard";
 import getSession from "../lib/getSession";
 import getCountry from "../lib/getCountry";
 import pool from "../lib/db";
-import LeaveReview from "../components/AddReview";
+import LinkButton from "../components/LinkButton";
 
 interface Room extends RowDataPacket {
   id: number;
@@ -115,12 +116,11 @@ export default async function Profile() {
         </p>
       )}
       <div className="flex justify-center">
-        <Link 
-          className="bg-rose-800 px-4 py-2 rounded-xl"
+        <LinkButton 
           href="/turf/new"
         >
           {rooms.length === 0 ? "Add Turf" : "Add more Turf"}
-        </Link>
+        </LinkButton>
       </div>
       <h2>
         My past bookings
@@ -180,12 +180,13 @@ export default async function Profile() {
           className="flex flex-col gap-8"
         >
           {pastBookingsWithReviews.map((booking) => (
-            <Link
+            <div
               key={booking.booking_id}
-              href={`/turf/${booking.room_id}`}
+              className="flex gap-4 items-center"
             >
-              <div
-                className="flex gap-4 items-center"
+              <Link
+                href={`/turf/${booking.room_id}`}
+                className="flex gap-4 items-center flex-1"
               >
                 <div>
                   <img
@@ -209,28 +210,28 @@ export default async function Profile() {
                     €{booking.booking_price}
                   </span>
                 </div>
-                <div>
-                  {booking.rating && (
-                    <div 
-                      className="flex mb-2"
-                    >
-                      {Array.from({ length: 5 }, (_, i) => i < booking.rating).map((filled, i) => (
-                        <StarIcon
-                          key={i}
-                          filled={filled}
-                        />
-                      ))}
-                    </div>
-                  )}
-                  {!booking.rating && (
-                    <LeaveReview 
-                      bookingId={booking.booking_id}
-                      title={booking.title}
-                      subtitle={`${booking.street} ${booking.city}, ${booking.country}`}/>
-                  )}
-                </div>
+              </Link>
+              <div>
+                {booking.rating && (
+                  <div 
+                    className="flex mb-2"
+                  >
+                    {Array.from({ length: 5 }, (_, i) => i < booking.rating).map((filled, i) => (
+                      <StarIcon
+                        key={i}
+                        filled={filled}
+                      />
+                    ))}
+                  </div>
+                )}
+                {!booking.rating && (
+                  <AddReview 
+                    bookingId={booking.booking_id}
+                    title={booking.title}
+                    subtitle={`${booking.street} ${booking.city}, ${booking.country}`}/>
+                )}
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       )}

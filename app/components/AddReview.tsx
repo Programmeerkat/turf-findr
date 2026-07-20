@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 
 import createReview from "../actions/createReview";
+import Button from "./Button";
 
 type AddReviewProps = {
   bookingId: string;
@@ -18,12 +19,11 @@ export default function AddReview({ title, subtitle, bookingId }: AddReviewProps
 
   return (
     <>
-      <button
-        className="bg-rose-800 p-2 m-auto rounded-xl"
+      <Button
         onClick={() => setModalIsOpen(true)}
       >
         Leave review
-      </button>
+      </Button>
       {modelIsOpen && createPortal(
         <div 
           className="fixed inset-0 flex items-center justify-center bg-black/50"
@@ -68,18 +68,16 @@ export default function AddReview({ title, subtitle, bookingId }: AddReviewProps
               <div 
                 className="flex gap-4"
               >
-                <button
-                  className="bg-rose-800 p-2 rounded-xl"
+                <Button
                   onClick={() => setModalIsOpen(false)}
                 >
                   Cancel
-                </button>
-                <button
-                  className="bg-rose-800 p-2 rounded-xl"
+                </Button>
+                <Button
                   type="submit"
                 >
                   Submit review
-                </button>
+                </Button>
               </div>
             </form>
           </div>

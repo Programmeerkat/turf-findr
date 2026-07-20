@@ -1,6 +1,7 @@
 "use client";
 
 import createTurf from "../actions/createTurf";
+import Button from "./Button";
 import { countries } from "../constants/countries";
 
 export default function AddTurf() {
@@ -64,12 +65,11 @@ export default function AddTurf() {
           </option>
         ))}
       </select>
-      <button
-        className="bg-black p-4 rounded-xl"
+      <Button
         type="submit"
       >
         Add Turf
-      </button>
+      </Button>
     </form>
   );
 }

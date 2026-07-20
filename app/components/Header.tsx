@@ -1,7 +1,10 @@
 import Link from "next/link";
+
 import logOut from "../actions/logout";
-import getSession from "../lib/getSession";
 import Avatar from "./Avatar";
+import Button from "./Button";
+import LinkButton from "./LinkButton";
+import getSession from "../lib/getSession";
 
 export default async function Header() {
   const session = await getSession();
@@ -28,11 +31,11 @@ export default async function Header() {
             <form 
               action={logOut}
             >
-              <button
+              <Button
                 type="submit"
               >
                 Logout
-              </button>
+              </Button>
             </form>
             <Link 
               href="/profile"
@@ -44,18 +47,20 @@ export default async function Header() {
           </div>
         ) : (
           <div
-            className="flex justify-end items-center gap-8 flex-1"
+            className="flex justify-end items-center gap-4 flex-1"
           >
-            <Link 
+            <LinkButton
               href="/signin"
+              variant="secondary"
             >
               Sign in
-            </Link>
-            <Link
+            </LinkButton>
+            <LinkButton
               href="/signup"
+              variant="secondary"
             >
               Sign up
-            </Link>
+            </LinkButton>
           </div>
         )}
       </div>

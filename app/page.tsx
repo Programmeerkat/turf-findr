@@ -2,9 +2,10 @@ import Link from "next/link";
 
 import { RowDataPacket } from "mysql2";
 
-import { UsersOverview } from "./components/UserOverview";
+import Button from "./components/Button";
 import CardContainer from "./components/CardContainer";
 import TurfCard from "./components/TurfCard";
+import UsersOverview from "./components/UserOverview";
 import pool from "./lib/db";
 import getCountry from "./lib/getCountry";
 
@@ -85,12 +86,11 @@ export default async function Home() {
                 />
               </div>
               <div>
-                <button
-                  className="bg-rose-800 hover:bg-rose-600 transition duration-300 px-8 py-4 rounded-xl"
+                <Button
                   type="submit"
                 >
                   Search!
-                </button>
+                </Button>
               </div>
             </div>
           </form>

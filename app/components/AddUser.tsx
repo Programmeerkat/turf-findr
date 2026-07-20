@@ -1,6 +1,7 @@
 "use client";
 
 import createUser from "../actions/createUser";
+import Button from "./Button";
 
 export default function AddUser() {
   return (
@@ -32,12 +33,11 @@ export default function AddUser() {
         className="bg-white border-black mb-4 text-black"
         type="text"
       />
-      <button
-        className="bg-black"
+      <Button
         type="submit"
       >
         Sign up
-      </button>
+      </Button>
     </form>
   );
 };

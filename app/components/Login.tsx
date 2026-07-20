@@ -1,6 +1,7 @@
 'use client';
 
 import login from "../actions/login";
+import Button from "./Button";
 
 export default function Login() {
     return (
@@ -24,12 +25,11 @@ export default function Login() {
 				className="bg-white border-black mb-4 text-black"
 				type="password"
 			/>
-			<button
-				className="bg-rose-800 hover:bg-rose-600 transition duration-300 px-8 py-4 rounded-xl"
+			<Button
 				type="submit"
 			>
 				Login
-			</button>
+			</Button>
 		</form>
     );
 }

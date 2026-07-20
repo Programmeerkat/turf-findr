@@ -8,7 +8,7 @@ type UsersOverviewProps = {
   users: User[];
 };
 
-export function UsersOverview({ users }: UsersOverviewProps) {
+export default function UsersOverview({ users }: UsersOverviewProps) {
   return (
     <div 
       className=""
