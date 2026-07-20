@@ -23,6 +23,7 @@ interface Room extends RowDataPacket {
 
 interface RoomBooking extends RowDataPacket {
   id: string;
+  booking_price: number;
   room_id: string;
   start_date: Date;
   end_date: Date;
@@ -71,12 +72,14 @@ export default async function Profile() {
   `, [session.user_id]);
 
   const [pastBookingsWithReviews] = await pool.query<RoomBooking[]>(`
-    SELECT rv.*, b.id as booking_id, b.start_date, b.end_date, r.city, r.country, r.street, r.title, r.img_src
+    SELECT rv.*, b.id as booking_id, b.booking_price, b.start_date, b.end_date, r.id as room_id, r.city, r.country, r.street, r.title, r.img_src
     FROM Bookings b
     JOIN Rooms r ON b.room_id = r.id
     LEFT JOIN Reviews rv ON rv.booking_id = b.id
     WHERE b.user_id = ? AND b.end_date < CURRENT_TIMESTAMP
   `, [session.user_id]);
+
+  console.log(pastBookingsWithReviews)
 
 	return (
 		<div 
@@ -127,30 +130,39 @@ export default async function Profile() {
         </p>
       )}
       {upcomingAndCurrentBookings.length > 0 && (
-        <div>
+        <div 
+          className="flex flex-col gap-8"
+        >
           {upcomingAndCurrentBookings.map((booking) => (
-            <div
+            <Link
               key={booking.id}
-              className="flex gap-4 items-center"
+              href={`/turf/${booking.room_id}`}
             >
-              <div>
-                <img
-                  className="h-20"
-                  src={booking.img_src}
-                />
-              </div>
-              <div className="flex-1 flex flex-col gap-1">
-                <span>
-                  {booking.title}
+              <div
+                className="flex gap-4 items-center"
+              >
+                <div>
+                  <img
+                    className="h-28"
+                    src={booking.img_src}
+                  />
+                </div>
+                <div className="flex-1 flex flex-col gap-1">
+                  <span>
+                    {booking.title}
+                    </span>
+                  <span>
+                    {booking.start_date.toLocaleDateString("nl-NL")} - {booking.end_date.toLocaleDateString("nl-NL")}
                   </span>
-                <span>
-                  {booking.start_date.toLocaleDateString("nl-NL")} - {booking.end_date.toLocaleDateString("nl-NL")}
-                </span>
-                <span
-                  >{booking.street} {booking.city}, {booking.country}
-                </span>
+                  <span
+                    >{booking.street} {booking.city}, {booking.country}
+                  </span>
+                  <span>
+                    €{booking.booking_price}
+                  </span>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}
@@ -167,48 +179,57 @@ export default async function Profile() {
           className="flex flex-col gap-8"
         >
           {pastBookingsWithReviews.map((booking) => (
-            <div
+            <Link
               key={booking.booking_id}
-              className="flex gap-4 items-center"
+              href={`/turf/${booking.room_id}`}
             >
-              <div>
-                <img
-                  className="h-20"
-                  src={booking.img_src}
-                />
-              </div>
-              <div className="flex-1 flex flex-col gap-1">
-                <span>
-                  {booking.title}
+              <div
+                className="flex gap-4 items-center"
+              >
+                <div>
+                  <img
+                    className="h-28"
+                    src={booking.img_src}
+                  />
+                </div>
+                <div 
+                  className="flex-1 flex flex-col gap-1"
+                >
+                  <span>
+                    {booking.title}
+                    </span>
+                  <span>
+                    {booking.start_date.toLocaleDateString("nl-NL")} - {booking.end_date.toLocaleDateString("nl-NL")}
                   </span>
-                <span>
-                  {booking.start_date.toLocaleDateString("nl-NL")} - {booking.end_date.toLocaleDateString("nl-NL")}
-                </span>
-                <span>
-                  {booking.street} {booking.city}, {booking.country}
-                </span>
+                  <span>
+                    {booking.street} {booking.city}, {booking.country}
+                  </span>
+                  <span>
+                    €{booking.booking_price}
+                  </span>
+                </div>
+                <div>
+                  {booking.rating && (
+                    <div 
+                      className="flex mb-2"
+                    >
+                      {Array.from({ length: 5 }, (_, i) => i < booking.rating).map((filled, i) => (
+                        <StarIcon
+                          key={i}
+                          filled={filled}
+                        />
+                      ))}
+                    </div>
+                  )}
+                  {!booking.rating && (
+                    <LeaveReview 
+                      bookingId={booking.booking_id}
+                      title={booking.title}
+                      subtitle={`${booking.street} ${booking.city}, ${booking.country}`}/>
+                  )}
+                </div>
               </div>
-              <div>
-                {booking.rating && (
-                  <div 
-                    className="flex mb-2"
-                  >
-                    {Array.from({ length: 5 }, (_, i) => i < booking.rating).map((filled, i) => (
-                      <StarIcon
-                        key={i}
-                        filled={filled}
-                      />
-                    ))}
-                  </div>
-                )}
-                {!booking.rating && (
-                  <LeaveReview 
-                    bookingId={booking.booking_id}
-                    title={booking.title}
-                    subtitle={`${booking.street} ${booking.city}, ${booking.country}`}/>
-                )}
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

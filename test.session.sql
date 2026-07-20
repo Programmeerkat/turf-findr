@@ -124,6 +124,7 @@ DROP TABLE Rooms;
 -- @block
 CREATE TABLE Bookings (
     id INT AUTO_INCREMENT,
+    booking_price DECIMAL(10, 2),
     room_id INT NOT NULL,
     user_id INT NOT NULL,
     start_date DATE NOT NULL,
