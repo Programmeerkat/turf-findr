@@ -43,7 +43,18 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 
   return (
     <div className="w-full">
-      <img src={room.img_src} className="w-full mb-4"/>
+      <div className="relative">
+        <img src={room.img_src} className="w-full mb-4"/>
+        {room.price && (
+          <div className="absolute bottom-2 right-2 bg-rose-800 p-2 rounded-xl">
+            <span
+              className="text-white"
+              >
+              €{room.price}
+            </span>
+          </div>
+        )}
+      </div>
       <p className="text-xl">€{room.price} per night</p>
       <p>{room.title}</p>
       <p>{room.description}</p>

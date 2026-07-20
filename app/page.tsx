@@ -105,7 +105,8 @@ export default async function Home() {
                 <TurfCard
                   title={room.title}
                   subtitle={`${room.city}, ${room.country}`}
-                  imgSrc={room.img_src}		
+                  imgSrc={room.img_src}
+                  price={room.price}	
                 />
               </Link>
             ))}
@@ -122,7 +123,8 @@ export default async function Home() {
                 <TurfCard
                   title={room.title}
                   subtitle={`${room.city}, ${room.country}`}
-                  imgSrc={room.img_src}					
+                  imgSrc={room.img_src}
+                  price={room.price}			
                 />
               </Link>
             ))}
@@ -139,7 +141,8 @@ export default async function Home() {
                 <TurfCard
                   title={room.title}
                   subtitle={`${room.city}, ${room.country}`}
-                  imgSrc={room.img_src}					
+                  imgSrc={room.img_src}
+                  price={room.price}					
                 />
               </Link>
             ))}

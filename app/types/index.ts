@@ -12,6 +12,7 @@ export type Room = {
   title: string;
   description: string;
   img_src: string;
+  price: number;
 };
 
 export type Review = {
