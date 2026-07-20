@@ -6,6 +6,7 @@ import { UsersOverview } from "./components/UserOverview";
 import CardContainer from "./components/CardContainer";
 import TurfCard from "./components/TurfCard";
 import pool from "./lib/db";
+import getCountry from "./lib/getCountry";
 
 interface Room extends RowDataPacket {
   id: number;
@@ -104,7 +105,7 @@ export default async function Home() {
               >
                 <TurfCard
                   title={room.title}
-                  subtitle={`${room.city}, ${room.country}`}
+                  subtitle={`${room.city}, ${getCountry(room.country)}`}
                   imgSrc={room.img_src}
                   price={room.price}	
                 />
@@ -122,7 +123,7 @@ export default async function Home() {
               >
                 <TurfCard
                   title={room.title}
-                  subtitle={`${room.city}, ${room.country}`}
+                  subtitle={`${room.city}, ${getCountry(room.country)}`}
                   imgSrc={room.img_src}
                   price={room.price}			
                 />
@@ -140,7 +141,7 @@ export default async function Home() {
               >
                 <TurfCard
                   title={room.title}
-                  subtitle={`${room.city}, ${room.country}`}
+                  subtitle={`${room.city}, ${getCountry(room.country)}`}
                   imgSrc={room.img_src}
                   price={room.price}					
                 />

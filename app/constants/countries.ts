@@ -1,0 +1,18 @@
+export const countries = [
+  { value: "AT", label: "Austria" },
+  { value: "BE", label: "Belgium" },
+  { value: "CH", label: "Switzerland" },
+  { value: "DE", label: "Germany" },
+  { value: "DK", label: "Denmark" },
+  { value: "ES", label: "Spain" },
+  { value: "FI", label: "Finland" },
+  { value: "FR", label: "France" },
+  { value: "GB", label: "United Kingdom" },
+  { value: "IE", label: "Ireland" },
+  { value: "IT", label: "Italy" },
+  { value: "LU", label: "Luxembourg" },
+  { value: "NL", label: "Netherlands" },
+  { value: "NO", label: "Norway" },
+  { value: "PT", label: "Portugal" },
+  { value: "SE", label: "Sweden" },
+];

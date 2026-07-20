@@ -1,6 +1,7 @@
 "use client";
 
 import createTurf from "../actions/createTurf";
+import { countries } from "../constants/countries";
 
 export default function AddTurf() {
   return (
@@ -13,7 +14,7 @@ export default function AddTurf() {
       </label>
       <input
         name="title"
-        className="bg-white border-black mb-4 text-black"
+        className="bg-white border-black mb-4 text-black p-1"
         type="text"
       />
       <label>
@@ -21,22 +22,22 @@ export default function AddTurf() {
       </label>
       <textarea
         name="description"
-        className="bg-white border-black mb-4 text-black"
+        className="bg-white border-black mb-4 text-black p-1"
       />
       <label>
         Price
       </label>
       <input
         name="price"
-        className="bg-white border-black mb-4 text-black"
+        className="bg-white border-black mb-4 text-black p-1"
         type="number"
       />
       <label>
-        Country
+        Street
       </label>
       <input
-        name="country"
-        className="bg-white border-black mb-4 text-black"
+        name="street"
+        className="bg-white border-black mb-4 text-black p-1"
         type="text"
       />
       <label>
@@ -44,17 +45,25 @@ export default function AddTurf() {
       </label>
       <input
         name="city"
-        className="bg-white border-black mb-4 text-black"
+        className="bg-white border-black mb-4 text-black p-1"
         type="text"
       />
       <label>
-        Street
+        Country
       </label>
-      <input
-        name="street"
-        className="bg-white border-black mb-4 text-black"
-        type="text"
-      />
+      <select
+        name="country"
+        className="bg-white border-black mb-4 text-black p-1"
+      >
+        {countries.map((country) => (
+          <option
+            key={country.value}
+            value={country.value}
+          >
+            {country.label}
+          </option>
+        ))}
+      </select>
       <button
         className="bg-black p-4 rounded-xl"
         type="submit"

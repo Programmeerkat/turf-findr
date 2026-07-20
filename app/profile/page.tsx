@@ -6,6 +6,7 @@ import { RowDataPacket } from "mysql2";
 import CardContainer from "../components/CardContainer";
 import TurfCard from "../components/TurfCard";
 import getSession from "../lib/getSession";
+import getCountry from "../lib/getCountry";
 import pool from "../lib/db";
 import LeaveReview from "../components/AddReview";
 
@@ -100,7 +101,7 @@ export default async function Profile() {
             >
               <TurfCard
                 title={room.title}
-                subtitle={`${room.city}, ${room.country}`}
+                subtitle={`${room.street} ${room.city}, ${getCountry(room.country)}`}
                 imgSrc={room.img_src}			
                 price={room.price}		
               />
