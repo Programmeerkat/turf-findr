@@ -144,7 +144,8 @@ VALUES
 -- @block
 INSERT INTO Bookings (room_id, user_id, start_date, end_date)
 VALUES 
-    (2, 14, '2026-03-07', '2026-03-08')
+    (6, 10, '2026-03-25', '2026-03-26'),
+    (8, 10, '2026-09-01', '2026-09-02')
 ;
 
 -- @block
@@ -199,12 +200,24 @@ CREATE TABLE Reviews (
 -- @block
 INSERT INTO Reviews (booking_id, rating, text)
 VALUES 
-  (1, 5, 'Perfect! Goed schoon'),
-  (2, 4, 'Goed, had schoner gekunt')
+  (6, 5, 'Nice'),
+  (7, 4, 'Very nice')
 ;
+
+
+-- @block
+DELETE FROM Reviews WHERE id = 4 OR id = 5;
 
 -- @block
 SELECT * FROM Reviews;
 
 -- @block
 DROP TABLE Reviews;
+
+
+
+
+--@block
+    SELECT * FROM Bookings b
+    JOIN Rooms r ON b.room_id = r.id
+    WHERE user_id = 10 AND b.end_date < CURRENT_TIMESTAMP;

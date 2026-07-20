@@ -7,6 +7,7 @@ import CardContainer from "../components/CardContainer";
 import TurfCard from "../components/TurfCard";
 import getSession from "../lib/getSession";
 import pool from "../lib/db";
+import LeaveReview from "../components/LeaveReview";
 
 interface Room extends RowDataPacket {
   id: number;
@@ -151,7 +152,7 @@ export default async function Profile() {
         <div className="flex flex-col gap-8">
           {pastBookingsWithReviews.map((booking) => (
             <div
-              key={booking.id}
+              key={booking.booking_id}
               className="flex gap-4 items-center"
             >
               <div>
@@ -177,11 +178,10 @@ export default async function Profile() {
                   </div>
                 )}
                 {!booking.rating && (
-                  <button
-                    className="bg-rose-800 p-2 m-auto rounded-xl"
-                  >
-                    Leave review
-                  </button>
+                  <LeaveReview 
+                    bookingId={booking.booking_id}
+                    title={booking.title}
+                    subtitle={`${booking.street} ${booking.city}, ${booking.country}`}/>
                 )}
               </div>
             </div>
