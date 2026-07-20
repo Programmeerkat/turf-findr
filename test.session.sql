@@ -142,6 +142,12 @@ VALUES
 ;
 
 -- @block
+INSERT INTO Bookings (room_id, user_id, start_date, end_date)
+VALUES 
+    (2, 14, '2026-03-07', '2026-03-08')
+;
+
+-- @block
 SELECT * FROM Bookings;
 
 -- @block
@@ -160,6 +166,13 @@ UPDATE Users SET name = 'Daniel' WHERE id = 10;
 
 
 
+-- @block
+SELECT u.*, COUNT(*) as booking_count
+FROM Users u 
+JOIN Bookings b ON u.id = b.user_id
+GROUP BY u.id
+ORDER BY booking_count DESC
+LIMIT 5;
 
 
 

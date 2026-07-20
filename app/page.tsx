@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { RowDataPacket } from "mysql2";
 
-import getUsers from "./actions/getUsers";
 import { UsersOverview } from "./components/UserOverview";
 import CardContainer from "./components/CardContainer";
 import TurfCard from "./components/TurfCard";
@@ -20,9 +19,13 @@ interface Room extends RowDataPacket {
   created_at: string;
 }
 
-export default async function Home() {
-  const users = await getUsers();
+interface Turfrs extends RowDataPacket {
+  id: number;
+  name: string;
+  booking_count: string;
+};
 
+export default async function Home() {
   const [popularTurf] = await pool.query<Room[]>(`
     SELECT r.*, COUNT(b.id) AS booking_count
     FROM Rooms r
@@ -36,6 +39,15 @@ export default async function Home() {
   `);
   const [cheapTurf] = await pool.query<Room[]>(`
     SELECT * FROM Rooms ORDER BY price DESC LIMIT 3
+  `);
+
+  const [popularTurfrs] = await pool.query<Turfrs[]>(`
+    SELECT u.id, u.name, COUNT(*) as booking_count
+    FROM Users u 
+    JOIN Bookings b ON u.id = b.user_id
+    GROUP BY u.id
+    ORDER BY booking_count DESC
+    LIMIT 5
   `);
   
   return (
@@ -93,7 +105,7 @@ export default async function Home() {
                 <TurfCard
                   title={room.title}
                   subtitle={`${room.city}, ${room.country}`}
-                  imgSrc={room.img_src}					
+                  imgSrc={room.img_src}		
                 />
               </Link>
             ))}
@@ -135,7 +147,7 @@ export default async function Home() {
           <h2 className="text-xl mb-4">
             Popular turfers
           </h2>
-          <UsersOverview users={users} />
+          <UsersOverview users={popularTurfrs} />
         </div>
       </main>
     </div>
