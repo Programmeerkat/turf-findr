@@ -2,9 +2,10 @@ import { RowDataPacket } from "mysql2";
 
 import pool from "@/app/lib/db";
 import ReviewCard from "@/app/components/ReviewCard";
+import AddBooking from "@/app/components/AddBooking";
 
 interface Room extends RowDataPacket {
-  id: number;
+  id: string;
   owner_id: number;
   price: number;
   country: string;
@@ -17,7 +18,7 @@ interface Room extends RowDataPacket {
 }
 
 interface Review extends RowDataPacket {
-  id: number;
+  id: string;
   booking_id: number;
   rating: number;
   text: string;
@@ -42,26 +43,29 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   console.log(reviews);
 
   return (
-    <div className="w-full">
-      <div className="relative">
-        <img src={room.img_src} className="w-full mb-4"/>
+    <div className="w-5xl">
+      <h2
+        className="mb-4"
+      >{room.title}</h2>
+      <div className="relative inline-block mb-4">
+        <img src={room.img_src} className=""/>
         {room.price && (
-          <div className="absolute bottom-2 right-2 bg-rose-800 p-2 rounded-xl">
-            <span
-              className="text-white"
-              >
-              €{room.price}
-            </span>
-          </div>
+          <span className="absolute bottom-2 right-2 bg-rose-800 p-2 rounded-xl text-white">
+            €{room.price}
+          </span>
         )}
       </div>
-      <p className="text-xl">€{room.price} per night</p>
-      <p>{room.title}</p>
       <p>{room.description}</p>
-      <p>Listed since: {room.created_at.toLocaleDateString("nl-NL")}</p>
-
-      <p>Address:</p>
+      <p
+        className="!mb-0"
+      >
+        Address:</p>
       <p>{room.street} {room.city}, {room.country}</p>
+      <p
+        className="!mb-0"
+      >
+        Listed since:</p>
+      <p>{room.created_at.toLocaleDateString("nl-NL")}</p>
       <h2 className="mb-4">Reviews:</h2>
       <div className="flex flex-col gap-4 w-full">
         {reviews.map((review) => (
@@ -73,6 +77,9 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
             text={review.text}/>
         ))}
       </div>
+      <AddBooking
+        roomId={room.id}
+      />
     </div>
   );
 }
