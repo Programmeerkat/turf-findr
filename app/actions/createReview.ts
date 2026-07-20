@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import pool from "../lib/db";
 import getSession from "../lib/getSession";
 
-export default async function addReview(bookingId: string, formData: FormData) {
+export default async function createReview(bookingId: string, formData: FormData) {
   const session = await getSession();
 
   if (!session) {
@@ -24,4 +24,4 @@ export default async function addReview(bookingId: string, formData: FormData) {
   );
 
   redirect("/profile");
-}
+};

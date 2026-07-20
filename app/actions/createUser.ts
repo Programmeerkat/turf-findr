@@ -19,4 +19,4 @@ export default async function createUser(formData: FormData) {
   );
 
   redirect("/");
-}
+};

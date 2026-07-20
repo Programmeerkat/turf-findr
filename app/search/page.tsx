@@ -16,7 +16,7 @@ interface Room extends RowDataPacket {
   description: string;
   img_src: string;
   created_at: string;
-}
+};
 
 export default async function Search({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }>}) {
   const { starting_date: startingDate, ending_date: endingDate } = await searchParams;

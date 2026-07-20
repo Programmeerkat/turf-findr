@@ -20,4 +20,4 @@ export type Review = {
   fromId: string;
   text: string;
   date: string;
-}
+};

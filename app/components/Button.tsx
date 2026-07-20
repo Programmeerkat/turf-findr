@@ -10,4 +10,4 @@ export default function Button({ label }: ButtonProps) {
       {label}
     </button>
   );
-}
+};

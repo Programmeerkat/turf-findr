@@ -7,7 +7,7 @@ import CardContainer from "../components/CardContainer";
 import TurfCard from "../components/TurfCard";
 import getSession from "../lib/getSession";
 import pool from "../lib/db";
-import LeaveReview from "../components/LeaveReview";
+import LeaveReview from "../components/AddReview";
 
 interface Room extends RowDataPacket {
   id: number;
@@ -43,7 +43,7 @@ function StarIcon({ filled }: { filled: boolean }) {
       />
     </svg>
   );
-}
+};
 
 export default async function Profile() {
 	const session = await getSession();
@@ -78,10 +78,10 @@ export default async function Profile() {
     WHERE b.user_id = ? AND b.end_date < CURRENT_TIMESTAMP
   `, [session.user_id]);
 
-  console.log(pastBookingsWithReviews)
-
 	return (
-		<div className="flex flex-col gap-8">
+		<div 
+      className="flex flex-col gap-8"
+    >
 			<h2>
 				Hi {name}
 			</h2>
@@ -118,9 +118,13 @@ export default async function Profile() {
           {rooms.length === 0 ? "Add Turf" : "Add more Turf"}
         </Link>
       </div>
-      <h2>My past bookings</h2>
+      <h2>
+        My past bookings
+      </h2>
       {upcomingAndCurrentBookings.length === 0 && (
-        <p>You don't have any current or upcoming bookings</p>
+        <p>
+          You don't have any current or upcoming bookings
+        </p>
       )}
       {upcomingAndCurrentBookings.length > 0 && (
         <div>
@@ -136,20 +140,32 @@ export default async function Profile() {
                 />
               </div>
               <div className="flex-1 flex flex-col gap-1">
-                <span>{booking.title}</span>
-                <span>{booking.start_date.toLocaleDateString("nl-NL")} - {booking.end_date.toLocaleDateString("nl-NL")}</span>
-                <span>{booking.street} {booking.city}, {booking.country}</span>
+                <span>
+                  {booking.title}
+                  </span>
+                <span>
+                  {booking.start_date.toLocaleDateString("nl-NL")} - {booking.end_date.toLocaleDateString("nl-NL")}
+                </span>
+                <span
+                  >{booking.street} {booking.city}, {booking.country}
+                </span>
               </div>
             </div>
           ))}
         </div>
       )}
-      <h2>My past bookings</h2>
+      <h2>
+        My past bookings
+      </h2>
       {pastBookingsWithReviews.length === 0 && (
-        <p>You don't have any past bookings</p>
+        <p>
+          You don't have any past bookings
+        </p>
       )}
       {pastBookingsWithReviews.length > 0 && (
-        <div className="flex flex-col gap-8">
+        <div 
+          className="flex flex-col gap-8"
+        >
           {pastBookingsWithReviews.map((booking) => (
             <div
               key={booking.booking_id}
@@ -162,13 +178,21 @@ export default async function Profile() {
                 />
               </div>
               <div className="flex-1 flex flex-col gap-1">
-                <span>{booking.title}</span>
-                <span>{booking.start_date.toLocaleDateString("nl-NL")} - {booking.end_date.toLocaleDateString("nl-NL")}</span>
-                <span>{booking.street} {booking.city}, {booking.country}</span>
+                <span>
+                  {booking.title}
+                  </span>
+                <span>
+                  {booking.start_date.toLocaleDateString("nl-NL")} - {booking.end_date.toLocaleDateString("nl-NL")}
+                </span>
+                <span>
+                  {booking.street} {booking.city}, {booking.country}
+                </span>
               </div>
               <div>
                 {booking.rating && (
-                  <div className="flex mb-2">
+                  <div 
+                    className="flex mb-2"
+                  >
                     {Array.from({ length: 5 }, (_, i) => i < booking.rating).map((filled, i) => (
                       <StarIcon
                         key={i}

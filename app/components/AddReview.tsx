@@ -3,27 +3,25 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 
-import addReview from "../actions/addReview";
+import createReview from "../actions/createReview";
 
-type LeaveReviewProps = {
+type AddReviewProps = {
   bookingId: string;
   title: string;
   subtitle: string;
-}
+};
 
-export default function LeaveReview({ title, subtitle, bookingId }: LeaveReviewProps) {
+export default function AddReview({ title, subtitle, bookingId }: AddReviewProps) {
   const [modelIsOpen, setModalIsOpen] = useState(false);
 
-  const addReviewWithId = addReview.bind(null, bookingId)
-
-  console.log(bookingId)
+  const createReviewWithId = createReview.bind(null, bookingId);
 
   return (
     <>
       <button
         className="bg-rose-800 p-2 m-auto rounded-xl"
         onClick={() => setModalIsOpen(true)}
-        >
+      >
         Leave review
       </button>
       {modelIsOpen && createPortal(
@@ -35,12 +33,14 @@ export default function LeaveReview({ title, subtitle, bookingId }: LeaveReviewP
             className="bg-gray-600 p-8 flex flex-col min-w-[400px] max-w-[600px]"
             onClick={(e) => e.stopPropagation()}
           >
-            <h2>Leave a review</h2>
+            <h2>
+              Leave a review
+            </h2>
             <p
               className="!mb-0"
             >
               {title}
-              </p>
+            </p>
             <span
               className="mb-2"
             >
@@ -48,20 +48,26 @@ export default function LeaveReview({ title, subtitle, bookingId }: LeaveReviewP
             </span>
             <form
               className="flex flex-col"
-              action={addReviewWithId}
-              >
-              <label>Rating</label>
+              action={createReviewWithId}
+            >
+              <label>
+                Rating
+              </label>
               <input
                 name="rating"
                 className="bg-white border-black mb-4 text-black"
                 type="number"
-                />
-              <label>Text</label>
+              />
+              <label>
+                Text
+              </label>
               <textarea
                 name="text"
                 className="bg-white border-black mb-4 text-black"
-                />
-              <div className="flex gap-4">
+              />
+              <div 
+                className="flex gap-4"
+              >
                 <button
                   className="bg-rose-800 p-2 rounded-xl"
                   onClick={() => setModalIsOpen(false)}

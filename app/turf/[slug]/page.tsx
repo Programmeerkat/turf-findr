@@ -15,7 +15,7 @@ interface Room extends RowDataPacket {
   description: string;
   img_src: string;
   created_at: Date;
-}
+};
 
 interface Review extends RowDataPacket {
   id: string;
@@ -24,7 +24,7 @@ interface Review extends RowDataPacket {
   text: string;
   created_at: Date;
   name: string;
-}
+};
 
 export default async function Page({ params }: { params: Promise<{ slug: string }>}) {
   const { slug: roomId } = await params;
@@ -40,34 +40,56 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     ORDER BY created_at DESC
   `, [roomId]);
 
-  console.log(reviews);
-
   return (
-    <div className="w-5xl">
+    <div 
+      className="w-5xl"
+    >
       <h2
         className="mb-4"
-      >{room.title}</h2>
-      <div className="relative inline-block mb-4">
-        <img src={room.img_src} className=""/>
+      >
+        {room.title}
+      </h2>
+      <div 
+        className="relative inline-block mb-4"
+      >
+        <img 
+          src={room.img_src}
+          className=""
+        />
         {room.price && (
-          <span className="absolute bottom-2 right-2 bg-rose-800 p-2 rounded-xl text-white">
+          <span
+            className="absolute bottom-2 right-2 bg-rose-800 p-2 rounded-xl text-white"
+          >
             €{room.price}
           </span>
         )}
       </div>
-      <p>{room.description}</p>
+      <p>
+          {room.description}
+      </p>
       <p
         className="!mb-0"
       >
         Address:</p>
-      <p>{room.street} {room.city}, {room.country}</p>
+      <p>
+        {room.street} {room.city}, {room.country}
+      </p>
       <p
         className="!mb-0"
       >
-        Listed since:</p>
-      <p>{room.created_at.toLocaleDateString("nl-NL")}</p>
-      <h2 className="mb-4">Reviews:</h2>
-      <div className="flex flex-col gap-4 w-full">
+        Listed since:
+      </p>
+      <p>
+        {room.created_at.toLocaleDateString("nl-NL")}
+      </p>
+      <h2
+        className="mb-4"
+      >
+        Reviews:
+      </h2>
+      <div
+        className="flex flex-col gap-4 w-full"
+      >
         {reviews.map((review) => (
           <ReviewCard
             key={review.id}

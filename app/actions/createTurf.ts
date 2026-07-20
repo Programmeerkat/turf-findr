@@ -2,8 +2,6 @@
 
 import { redirect } from "next/navigation";
 
-import bcrypt from "bcryptjs";
-
 import pool from "../lib/db";
 import getSession from "../lib/getSession";
 
@@ -29,4 +27,4 @@ export default async function createTurf(formData: FormData) {
   );
 
   redirect("/profile");
-}
+};

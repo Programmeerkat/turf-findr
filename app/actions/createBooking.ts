@@ -23,4 +23,4 @@ export default async function createBooking(roomId: string, formData: FormData) 
   );
 
   redirect("/");
-}
+};

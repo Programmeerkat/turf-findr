@@ -52,8 +52,8 @@ export default async function Home() {
   
   return (
     <div className="">
-      <main className="">
-        <div className="max-w-5xl mx-auto flex flex-col gap-4 py-4">
+      <main className="w-5xl">
+        <div className="flex flex-col gap-4 py-4">
           <h2 className="text-xl mb-4">
             Find turf
           </h2>

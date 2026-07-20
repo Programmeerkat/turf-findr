@@ -1,17 +1,21 @@
-import { User } from "../types";
+type User = {
+  id: number;
+  name: string;
+  booking_count: number;
+};
 
 type UsersOverviewProps = {
-  users: {
-    id: number;
-    name: string;
-    booking_count: string;
-  }[]
+  users: User[];
 };
 
 export function UsersOverview({ users }: UsersOverviewProps) {
   return (
-    <div className="">
-      <ul className="flex gap-8 text-center">
+    <div 
+      className=""
+    >
+      <ul 
+        className="flex gap-8 text-center"
+      >
         {users.map(user => (
           <li
             key={user.id}
@@ -20,11 +24,13 @@ export function UsersOverview({ users }: UsersOverviewProps) {
               src="https://placehold.co/150x150"
               className="mb-4 rounded-full"
             />
-            <p className="!mb-0">  
+            <p
+              className="!mb-0"
+            >  
               {user.name}
             </p>
             <p>
-              {user.booking_count} bookings
+              {user.booking_count} {user.booking_count === 1 ? "booking" : "bookings"}
             </p>
           </li>
         ))}
