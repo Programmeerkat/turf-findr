@@ -1,7 +1,7 @@
 type User = {
-  id: number;
+  id: string;
   name: string;
-  booking_count: number;
+  booking_count: string;
 };
 
 type UsersOverviewProps = {

@@ -22,7 +22,7 @@ interface Room extends RowDataPacket {
 }
 
 interface Turfrs extends RowDataPacket {
-  id: number;
+  id: string;
   name: string;
   booking_count: string;
 };
