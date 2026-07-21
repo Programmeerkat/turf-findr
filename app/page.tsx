@@ -24,7 +24,7 @@ interface Room extends RowDataPacket {
 interface Turfrs extends RowDataPacket {
   id: string;
   name: string;
-  booking_count: string;
+  booking_count: number;
 };
 
 export default async function Home() {
