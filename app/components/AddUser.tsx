@@ -19,39 +19,39 @@ export default function AddUser() {
 
   return (
     <form
-      className="bg-gray-600 p-8 flex flex-col max-w-[600px]"
+			className="pl-8 flex flex-col max-w-[400px] mx-auto"
       action={formAction}
-      >
+    >
       <label>
         Email
       </label>
       <input
         name="email"
-        className="bg-white border-black text-black p-1 mb-2"
+        className="bg-white border-black text-black p-1 mb-4"
         type="text"
         onChange={() => setEmailIsDirty(true)}
       />
-      {state?.errors?.email && !emailIsDirty && <p className="text-red-400 mb-2">{state.errors.email}</p>}
+      {state?.errors?.email && !emailIsDirty && <p className="text-red-400 mb-4">{state.errors.email}</p>}
       <label>
         Password
       </label>
       <input
         name="password"
-        className="bg-white border-black text-black p-1 mb-2"
+        className="bg-white border-black text-black p-1 mb-4"
         type="password"
         onChange={() => setPasswordIsDirty(true)}
       />
-      {state?.errors?.password && !passwordIsDirty && <p className="text-red-400 mb-2">{state.errors.password}</p>}
+      {state?.errors?.password && !passwordIsDirty && <p className="text-red-400 mb-4">{state.errors.password}</p>}
       <label>
         Username
         </label>
       <input
         name="username"
-        className="bg-white border-black text-black p-1 mb-2"
+        className="bg-white border-black text-black p-1 mb-4"
         type="text"
         onChange={() => setUserNameIsDirty(true)}
       />
-      {state?.errors?.name && !userNameIsDirty && <p className="text-red-400 mb-2">{state.errors.name}</p>}
+      {state?.errors?.name && !userNameIsDirty && <p className="text-red-400 mb-4">{state.errors.name}</p>}
       <Button
         disabled={pending}
         type="submit"

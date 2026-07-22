@@ -7,8 +7,8 @@ type CardContainerProps = {
 export default function CardContainer({ children }: CardContainerProps) {
 	return (
 		<div 
-      className="flex gap-8 flex-wrap"
-    >
+			className="flex gap-8 flex-wrap pb-6"
+    	>
 			{children}
 		</div>
 	);

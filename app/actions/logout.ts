@@ -15,8 +15,6 @@ export default async function logOut() {
   await pool.execute("DELETE FROM Sessions WHERE id = ?", [sessionId.value]);
   
   cookieStore.delete("session");
-
-  console.log("User sucessfully logged out");
   
   redirect('/');
 };

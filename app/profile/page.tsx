@@ -10,6 +10,8 @@ import getSession from "../lib/getSession";
 import getCountry from "../lib/getCountry";
 import pool from "../lib/db";
 import LinkButton from "../components/LinkButton";
+import ReviewContainer from "../components/ReviewContainer";
+import BookingReview from "../components/BookingReview";
 
 interface Room extends RowDataPacket {
   id: number;
@@ -67,12 +69,6 @@ export default async function Profile() {
     WHERE b.user_id = ? AND b.end_date >= CURRENT_TIMESTAMP
   `, [session.user_id]);
 
-  const [pastBookings] = await pool.query<RoomBooking[]>(`
-    SELECT * FROM Rooms r
-    JOIN Bookings b ON b.room_id = r.id
-    WHERE b.user_id = ? AND b.end_date < CURRENT_TIMESTAMP
-  `, [session.user_id]);
-
   const [pastBookingsWithReviews] = await pool.query<RoomBooking[]>(`
     SELECT rv.*, b.id as booking_id, b.booking_price, b.start_date, b.end_date, r.id as room_id, r.city, r.country, r.street, r.title, r.img_src
     FROM Bookings b
@@ -81,16 +77,16 @@ export default async function Profile() {
     WHERE b.user_id = ? AND b.end_date < CURRENT_TIMESTAMP
   `, [session.user_id]);
 
-  console.log(pastBookingsWithReviews)
-
 	return (
-		<div 
-      className="flex flex-col gap-8"
-    >
-			<h2>
+		<div>
+      <h2 
+        className="text-xl mb-4"
+      >
 				Hi {name}
 			</h2>
-			<h2>
+      <h2 
+        className="text-xl mb-4"
+      >
 				Your Turf
 			</h2>
 			{rooms.length > 0 && (
@@ -115,70 +111,60 @@ export default async function Profile() {
           You dont have turf
         </p>
       )}
-      <div className="flex justify-center">
+      <div 
+        className="flex justify-center mb-6"
+      >
         <LinkButton 
           href="/turf/new"
         >
           {rooms.length === 0 ? "Add Turf" : "Add more Turf"}
         </LinkButton>
       </div>
-      <h2>
-        My past bookings
+      <h2 
+        className="text-xl mb-4"
+      >
+        My upcoming bookings
       </h2>
       {upcomingAndCurrentBookings.length === 0 && (
-        <p>
+        <p 
+          className="mb-6"
+        >
           You don't have any current or upcoming bookings
         </p>
       )}
       {upcomingAndCurrentBookings.length > 0 && (
-        <div 
-          className="flex flex-col gap-8"
-        >
+        <ReviewContainer>
           {upcomingAndCurrentBookings.map((booking) => (
             <Link
               key={booking.id}
               href={`/turf/${booking.room_id}`}
             >
-              <div
-                className="flex gap-4 items-center"
-              >
-                <div>
-                  <img
-                    className="h-28"
-                    src={booking.img_src}
-                  />
-                </div>
-                <div className="flex-1 flex flex-col gap-1">
-                  <span>
-                    {booking.title}
-                    </span>
-                  <span>
-                    {booking.start_date.toLocaleDateString("nl-NL")} - {booking.end_date.toLocaleDateString("nl-NL")}
-                  </span>
-                  <span
-                    >{booking.street} {booking.city}, {booking.country}
-                  </span>
-                  <span>
-                    €{booking.booking_price}
-                  </span>
-                </div>
-              </div>
+              <BookingReview
+                title={booking.title}
+                subtitle={`${booking.street} ${booking.city}, ${booking.country}`}
+                img_src={booking.img_src}
+                start_date={booking.start_date}
+                end_date={booking.end_date}
+                booking_price={booking.booking_price}
+              />
             </Link>
           ))}
-        </div>
+        </ReviewContainer>
       )}
-      <h2>
+      <h2 
+        className="text-xl mb-4"
+      >
         My past bookings
       </h2>
       {pastBookingsWithReviews.length === 0 && (
-        <p>
+        <p 
+          className="mb-6"
+        >
           You don't have any past bookings
         </p>
       )}
       {pastBookingsWithReviews.length > 0 && (
-        <div 
-          className="flex flex-col gap-8"
-        >
+        <ReviewContainer>
           {pastBookingsWithReviews.map((booking) => (
             <div
               key={booking.booking_id}
@@ -188,28 +174,14 @@ export default async function Profile() {
                 href={`/turf/${booking.room_id}`}
                 className="flex gap-4 items-center flex-1"
               >
-                <div>
-                  <img
-                    className="h-28"
-                    src={booking.img_src}
-                  />
-                </div>
-                <div 
-                  className="flex-1 flex flex-col gap-1"
-                >
-                  <span>
-                    {booking.title}
-                    </span>
-                  <span>
-                    {booking.start_date.toLocaleDateString("nl-NL")} - {booking.end_date.toLocaleDateString("nl-NL")}
-                  </span>
-                  <span>
-                    {booking.street} {booking.city}, {booking.country}
-                  </span>
-                  <span>
-                    €{booking.booking_price}
-                  </span>
-                </div>
+                <BookingReview
+                  title={booking.title}
+                  subtitle={`${booking.street} ${booking.city}, ${booking.country}`}
+                  img_src={booking.img_src}
+                  start_date={booking.start_date}
+                  end_date={booking.end_date}
+                  booking_price={booking.booking_price}
+                />
               </Link>
               <div>
                 {booking.rating && (
@@ -233,7 +205,7 @@ export default async function Profile() {
               </div>
             </div>
           ))}
-        </div>
+        </ReviewContainer>
       )}
 		</div>
 	);

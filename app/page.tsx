@@ -53,18 +53,28 @@ export default async function Home() {
   `);
   
   return (
-    <div className="flex flex-col gap-4 py-4">
-      <h2 className="text-xl mb-4">
+    <div>
+      <h2 
+        className="text-xl mb-4"
+      >
         Find turf
       </h2>
-      <form action="/search" method="GET" className="bg-gray-900 flex gap-4 p-4">
-        <div className="flex gap-8 items-center">
+      <form 
+        action="/search" 
+        method="GET" 
+        className="bg-gray-900 flex gap-4 p-4 mb-6"
+      >
+        <div 
+          className="flex gap-8 items-center"
+        >
           <div>
             <p>
               Destination
             </p>
             <input 
-              type="text" name="destination" className="bg-white text-black px-2 py-1"
+              type="text" 
+              name="destination" 
+              className="bg-white text-black px-2 py-1"
             />
           </div>
           <div>
@@ -72,15 +82,19 @@ export default async function Home() {
               From
             </p>
             <input 
-              type="date" name="starting_date" className="bg-white text-black px-2 py-1"
+              type="date" 
+              name="starting_date"
+              className="bg-white text-black px-2 py-1"
             />
           </div>
           <div>
             <p>
               To
             </p>
-            <input 
-              type="date" name="ending_date" className="bg-white text-black px-2 py-1"
+            <input
+              type="date"
+              name="ending_date"
+              className="bg-white text-black px-2 py-1"
             />
           </div>
           <div>
@@ -92,7 +106,9 @@ export default async function Home() {
           </div>
         </div>
       </form>
-      <h2 className="text-xl mb-4">
+      <h2 
+        className="text-xl mb-4"
+      >
         Popular turf
       </h2>
       <CardContainer>
@@ -110,7 +126,9 @@ export default async function Home() {
           </Link>
         ))}
       </CardContainer>
-      <h2 className="text-xl mb-4">
+      <h2 
+        className="text-xl mb-4"
+      >
         New turf
       </h2>
       <CardContainer>
@@ -128,7 +146,9 @@ export default async function Home() {
           </Link>
         ))}
       </CardContainer>
-      <h2 className="text-xl mb-4">
+      <h2 
+        className="text-xl mb-4"
+      >
         Cheap turf
       </h2>
       <CardContainer>
@@ -146,7 +166,9 @@ export default async function Home() {
           </Link>
         ))}
       </CardContainer>
-      <h2 className="text-xl mb-4">
+      <h2 
+        className="text-xl mb-4"
+      >
         Popular turfers
       </h2>
       <UsersOverview users={popularTurfrs} />

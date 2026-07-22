@@ -34,10 +34,12 @@ export default function RootLayout({
         className="min-h-full flex flex-col min-h-full"
       >
         <Header />
-        <main 
-          className="max-w-5xl mx-auto py-8 min-w-[430px] flex-1"
-        >
-          {children}
+        <main>
+          <div
+            className="flex mx-auto flex-col align-center justify-start gap-8 max-w-5xl pt-6 pb-8"
+          >
+            {children}
+          </div>
         </main>
         <Footer />
       </body>

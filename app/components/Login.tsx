@@ -17,7 +17,7 @@ export default function Login() {
 
   return (
 		<form 
-			className="pl-8 flex flex-col"
+			className="pl-8 flex flex-col max-w-[400px] mx-auto"
 			action={formAction}
 		>
 			<label>
@@ -25,7 +25,7 @@ export default function Login() {
       </label>
 			<input
 				name="email"
-        className="bg-white border-black text-black p-1 mb-2"
+        className="bg-white border-black text-black p-1 mb-4"
 				type="email"
         onChange={() => setIsDirty(true)}
 			/>
@@ -34,11 +34,11 @@ export default function Login() {
       </label>
 			<input
 				name="password"
-        className="bg-white border-black text-black p-1 mb-2"
+        className="bg-white border-black text-black p-1 mb-4"
 				type="password"
         onChange={() => setIsDirty(true)}
 			/>
-			{error && <p className="text-red-400">{error}</p>}
+			{error && <p className="text-red-400 mb-4">{error}</p>}
 			<Button
         disabled={pending}
 				type="submit"
@@ -46,5 +46,5 @@ export default function Login() {
 				Login
 			</Button>
 		</form>
-    );
+	);
 }

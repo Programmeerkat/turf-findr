@@ -14,9 +14,6 @@ export default async function createReview(bookingId: string, formData: FormData
 
   const rating = formData.get("rating");
   const text = formData.get("text");
-
-  console.log(rating)
-  console.log(text)
   
   await pool.execute(
     "INSERT INTO Reviews (booking_id, rating, text) VALUES (?, ?, ?)",
