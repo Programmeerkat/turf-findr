@@ -19,17 +19,17 @@ interface Room extends RowDataPacket {
 };
 
 export default async function Search({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }>}) {
-  const { starting_date: startingDate, ending_date: endingDate } = await searchParams;
+  const { destination, starting_date: startingDate, ending_date: endingDate } = await searchParams;
 
   const [availableRooms] = await pool.query<Room[]>(`
     SELECT * FROM Rooms
-    WHERE NOT EXISTS (
+    WHERE Rooms.city = ? AND NOT EXISTS (
       SELECT 1 FROM Bookings
       WHERE Bookings.room_id = Rooms.id
       AND start_date < ?
       AND end_date > ?
     )
-  `, [endingDate, startingDate]);
+  `, [destination, endingDate, startingDate]);
   
   const availableRoomsCount = availableRooms.length;
 
